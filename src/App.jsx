@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Header from './components/Header';
 import Todo from './components/Todo';
@@ -18,10 +19,11 @@ class App extends React.Component {
         this.handleEdit = this.handleEdit.bind(this);
     }
 
-    nextId() {
-        this._nextId = this._nextId || 4;
-
-        return this._nextId++;
+    componentDidMount() {
+        axios.get('http://localhost:3000/api/todos')
+            .then(response => response.data)
+            .then(todos => this.setState({ todos }))
+            .catch(error => console.error(error.message));
     }
 
     handleAdd(title) {
