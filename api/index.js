@@ -1,21 +1,15 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const todos = require('./api/todos');
-
-const app = express();
+const todos = require('./todos');
 
 let nextId = 4;
 
-app.set('port', (process.env.PORT || 3000));
+const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-cache');
@@ -27,7 +21,7 @@ app.get('/api/todos', (req, res) => {
 });
 
 app.post('/api/todos', (req, res) => {
-    const todo = {
+    let todo = {
         id: nextId++,
         title: req.body.title,
         completed: false
@@ -39,7 +33,7 @@ app.post('/api/todos', (req, res) => {
 });
 
 app.put('/api/todos/:id', (req, res) => {
-    const todo = todos.find(todo => todo.id == req.params.id);
+    let todo = todos.find(todo => todo.id == req.params.id);
 
     if (!todo) return res.sendStatus(404);
 
@@ -49,7 +43,7 @@ app.put('/api/todos/:id', (req, res) => {
 });
 
 app.patch('/api/todos/:id', (req, res) => {
-    const todo = todos.find(todo => todo.id == req.params.id);
+    let todo = todos.find(todo => todo.id == req.params.id);
 
     if (!todo) return res.sendStatus(404);
 
@@ -59,7 +53,7 @@ app.patch('/api/todos/:id', (req, res) => {
 });
 
 app.delete('/api/todos/:id', (req, res) => {
-    const index = todos.findIndex(todo => todo.id == req.params.id);
+    let index = todos.findIndex(todo => todo.id == req.params.id);
     
     if (index === -1) return res.sendStatus(404);
 
@@ -68,13 +62,4 @@ app.delete('/api/todos/:id', (req, res) => {
     res.sendStatus(204);
 });
 
-app.get('*', (req, res) => {
-    fs.readFile(`${__dirname}/public/index.html`, (error, html) => {
-        if (error) throw error;
-
-        res.setHeader('Content-Type', 'text/html');
-        res.end(html);
-    });
-});
-
-app.listen(app.get('port'), () => console.log(`Server is listening: http://localhost:${app.get('port')}`));
+app.listen(5000, 'localhost');

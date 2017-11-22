@@ -12,11 +12,4 @@ function Button(props) {
     );
 }
 
-Button.propTypes = {
-    className: React.PropTypes.string,
-    icon: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    children: React.PropTypes.node
-};
-
 export default Button;

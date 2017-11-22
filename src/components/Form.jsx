@@ -46,8 +46,4 @@ class Form extends React.Component {
     }
 }
 
-Form.propTypes = {
-    onAdd: React.PropTypes.func.isRequired
-};
-
 export default Form;

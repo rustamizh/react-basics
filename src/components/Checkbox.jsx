@@ -8,9 +8,4 @@ function Checkbox(props) {
     );
 };
 
-Checkbox.propTypes = {
-    checked: React.PropTypes.bool.isRequired,
-    onChange: React.PropTypes.func.isRequired
-};
-
 export default Checkbox;

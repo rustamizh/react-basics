@@ -13,8 +13,4 @@ function Header(props) {
     );
 }
 
-Header.propTypes = {
-    todos: React.PropTypes.array.isRequired
-};
-
 export default Header;

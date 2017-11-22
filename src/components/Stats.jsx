@@ -27,8 +27,4 @@ function Stats(props) {
     );
 }
 
-Stats.propTypes = {
-    todos: React.PropTypes.array.isRequired
-};
-
 export default Stats;
