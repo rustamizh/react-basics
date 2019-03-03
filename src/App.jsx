@@ -14,6 +14,7 @@ class App extends React.Component {
 
         this.handleStatusChange = this.handleStatusChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     handleStatusChange(id) {
@@ -29,6 +30,25 @@ class App extends React.Component {
 
     handleDelete(id) {
         let todos = this.state.todos.filter(todo => todo.id !== id);
+
+        this.setState({
+            todos: todos
+        });
+    }
+
+    nextId() {
+        this._nextId = this._nextId || 4;
+        return this._nextId++;
+    }
+
+    handleAdd(title) {
+        let todo = {
+            id: this.nextId(),
+            title: title,
+            completed: false
+        }
+
+        let todos = [...this.state.todos, todo];
 
         this.setState({
             todos: todos
@@ -51,7 +71,7 @@ class App extends React.Component {
                             onStatusChange={this.handleStatusChange}/>)
                     }
                 </section>
-                <Form />
+                <Form onAdd={this.handleAdd}/>
             </main>
         );
     }
