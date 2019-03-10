@@ -46,6 +46,12 @@ class Todo extends React.Component {
         )
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(this.state.editing) {
+            this.refs.title.select();
+        }
+    }
+
     render() {
         return this.state.editing ? this.renderForm() : this.renderDisplay()
             
