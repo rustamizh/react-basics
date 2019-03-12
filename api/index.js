@@ -63,3 +63,4 @@ app.delete('/api/todos/:id', (req, res) => {
 });
 
 app.listen(5000, 'localhost');
+console.log('Listen to 5000...')
