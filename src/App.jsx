@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from './components/Header';
 import Todo from './components/Todo';
 import Form from './components/Form';
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class App extends React.Component {
     constructor(props) {
@@ -71,7 +72,14 @@ class App extends React.Component {
         return (
             <main>
                 <Header todos={this.state.todos} title={this.props.title}/>
-                <section className="todo-list">
+                <CSSTransitionGroup
+                    className="todo-list"
+                    component="section"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionName="slide"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
                     {
                         this.state.todos.map(todo  => 
                         <Todo 
@@ -83,7 +91,7 @@ class App extends React.Component {
                             onEdit={this.handleEdit}
                             onStatusChange={this.handleStatusChange}/>)
                     }
-                </section>
+                </CSSTransitionGroup>
                 <Form onAdd={this.handleAdd}/>
             </main>
         );
